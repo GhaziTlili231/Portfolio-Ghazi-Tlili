@@ -640,6 +640,24 @@
         </div>
       </div>
 
+      <div class="project-card" onclick="openModalOmnia()">
+        <div class="project-thumb">
+          <img src="images/o1.png" alt="Omnia Charity Tracking" onerror="this.style.display='none'; this.parentElement.innerHTML='❤️';" /><div class="project-thumb-overlay"><span>Voir plus</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-name">Omnia Charity Tracking — Hackathon</div>
+          <div class="project-desc">Plateforme intelligente de gestion caritative pour le suivi des familles vulnérables avec chatbot, Google Maps et paiement en ligne.</div>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag tag-blue">Angular</span>
+              <span class="tag tag-green">Node.js</span>
+              <span class="tag tag-pink">MongoDB</span>
+              <span class="tag tag-yellow">Google Maps</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -742,6 +760,34 @@
         </div>
         <div class="modal-desc">
           Plateforme e-commerce de vente de pièces de rechange automobiles avec catalogue par marque/modèle, panier, chatbot intelligent, dashboard admin et gestion des commandes.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT MODAL: Omnia Charity Tracking -->
+  <div class="project-modal-overlay" id="modal-omnia" onclick="if(event.target===this) closeModalOmnia()">
+    <div class="project-modal">
+      <button class="modal-close" onclick="closeModalOmnia()">✕</button>
+      <div class="modal-carousel">
+        <div class="carousel-counter" id="carouselCounterOmnia">1 / 18</div>
+        <div class="carousel-track" id="carouselTrackOmnia"></div>
+        <button class="carousel-btn prev" onclick="carouselMoveOmnia(-1)">&#8592;</button>
+        <button class="carousel-btn next" onclick="carouselMoveOmnia(1)">&#8594;</button>
+        <div class="carousel-dots" id="carouselDotsOmnia"></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-title">Omnia Charity Tracking — Hackathon</div>
+        <div class="modal-tags">
+          <span class="tag tag-blue">Angular</span>
+          <span class="tag tag-green">Node.js</span>
+          <span class="tag tag-pink">MongoDB</span>
+          <span class="tag tag-yellow">Google Maps</span>
+          <span class="tag tag-orange">Flouci API</span>
+          <span class="tag tag-blue">ChatGPT API</span>
+        </div>
+        <div class="modal-desc">
+          Plateforme intelligente de gestion caritative pour le suivi des familles vulnérables. Gestion avancée des bénéficiaires (santé, handicap, âge, genre, situation sociale), planification et suivi des visites terrain des travailleurs sociaux, gestion des aides (alimentaire, médicaments, aides spécifiques), campagnes de dons avec paiement en ligne sécurisé, intégration de Google Maps API pour la localisation, fonctionnalités d'accessibilité (Text-to-Speech, interaction vocale), chatbot intelligent avec support vocal.
         </div>
       </div>
     </div>
@@ -912,8 +958,88 @@
       if (counter) counter.textContent = `${currentSlideWallet + 1} / ${walletImages.length}`;
     }
 
+    // ---- MODAL OMNIA CHARITY TRACKING ----
+    const omniaImages = [
+      { src: 'images/o1.png', caption: 'Omnia — Dashboard Principal' },
+      { src: 'images/o2.png', caption: 'Omnia — Gestion Bénéficiaires' },
+      { src: 'images/o3.png', caption: 'Omnia — Profil Bénéficiaire' },
+      { src: 'images/o4.png', caption: 'Omnia — Carte Interactive' },
+      { src: 'images/o5.png', caption: 'Omnia — Visites Terrain' },
+      { src: 'images/o6.png', caption: 'Omnia — Planification Visites' },
+      { src: 'images/o7.png', caption: 'Omnia — Gestion Aides' },
+      { src: 'images/o8.png', caption: 'Omnia — Campagnes de Dons' },
+      { src: 'images/o9.png', caption: 'Omnia — Paiement en Ligne' },
+      { src: 'images/o10.png', caption: 'Omnia — Chatbot Intelligent' },
+      { src: 'images/o11.png', caption: 'Omnia — Support Vocal' },
+      { src: 'images/o12.png', caption: 'Omnia — Accessibilité' },
+      { src: 'images/o13.png', caption: 'Omnia — Statistiques' },
+      { src: 'images/o14.png', caption: 'Omnia — Rapports' },
+      { src: 'images/o15.png', caption: 'Omnia — Notifications' },
+      { src: 'images/o16.png', caption: 'Omnia — Paramètres' },
+      { src: 'images/o17.png', caption: 'Omnia — Administration' },
+      { src: 'images/o18.png', caption: 'Omnia — Vue Globale' },
+    ];
+    let currentSlideOmnia = 0;
+
+    function buildCarouselOmnia() {
+      const track = document.getElementById('carouselTrackOmnia');
+      const dotsContainer = document.getElementById('carouselDotsOmnia');
+      track.innerHTML = ''; dotsContainer.innerHTML = '';
+      omniaImages.forEach((item, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide'; slide.style.position = 'relative';
+        const img = document.createElement('img');
+        img.src = item.src; img.alt = item.caption;
+        img.onerror = function() { this.parentElement.innerHTML = '<span class="slide-placeholder">❤️</span>'; };
+        slide.appendChild(img);
+        if (item.caption) {
+          const cap = document.createElement('div');
+          cap.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.55);color:#fff;font-size:0.8rem;padding:6px 12px;font-family:Space Mono,monospace;';
+          cap.textContent = item.caption;
+          slide.appendChild(cap);
+        }
+        track.appendChild(slide);
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => carouselGoOmnia(i);
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function openModalOmnia() {
+      currentSlideOmnia = 0;
+      buildCarouselOmnia();
+      updateCarouselOmnia();
+      document.getElementById('modal-omnia').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModalOmnia() {
+      document.getElementById('modal-omnia').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function carouselMoveOmnia(dir) {
+      currentSlideOmnia = (currentSlideOmnia + dir + omniaImages.length) % omniaImages.length;
+      updateCarouselOmnia();
+    }
+
+    function carouselGoOmnia(index) {
+      currentSlideOmnia = index;
+      updateCarouselOmnia();
+    }
+
+    function updateCarouselOmnia() {
+      document.getElementById('carouselTrackOmnia').style.transform = `translateX(-${currentSlideOmnia * 100}%)`;
+      document.querySelectorAll('#modal-omnia .carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentSlideOmnia);
+      });
+      const counter = document.getElementById('carouselCounterOmnia');
+      if (counter) counter.textContent = `${currentSlideOmnia + 1} / ${omniaImages.length}`;
+    }
+
     // Close modals on Escape key
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeModalWallet(); } });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeModalWallet(); closeModalOmnia(); } });
 
     // ---- SMOOTH SCROLL ----
     // ---- SMOOTH SCROLL ----
