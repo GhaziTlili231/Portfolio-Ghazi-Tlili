@@ -1,0 +1,941 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ghazi Tlili — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
+  <style>
+    :root {
+      --c1: #2563EB;
+      --c2: #818CF8;
+      --c3: #06D6A0;
+      --c4: #38BDF8;
+      --c5: #A78BFA;
+      --bg: #080D1A;
+      --surface: #0F1629;
+      --text: #F0EDE8;
+      --muted: #6B7280;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(8,13,26,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #1a2540;
+    }
+    .logo {
+      font-size: 1.4rem; font-weight: 800;
+      background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      font-family: 'Space Mono', monospace;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1; gap: 3rem;
+    }
+    .hero-content { flex: 1; }
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      width: 320px; height: 380px;
+      position: relative; z-index: 1;
+    }
+    .hero-photo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 20px;
+      border: 2px solid #1a2540;
+      box-shadow: 0 0 60px rgba(129,140,248,0.2);
+    }
+    .hero-bg {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(129,140,248,0.2) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(6,214,160,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(37,99,235,0.12) 0%, transparent 60%);
+    }
+    .hero-photo {
+      position: relative; z-index: 1;
+      width: 72px; height: 72px; border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--c2);
+      box-shadow: 0 0 0 4px rgba(129,140,248,0.15);
+      margin-bottom: 1.2rem;
+    }
+      font-size: 0.85rem; color: var(--c3);
+      margin-bottom: 1.2rem; position: relative; z-index: 1;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 800; line-height: 1.0;
+      position: relative; z-index: 1;
+    }
+    .hero h1 .line1 { display: block; color: var(--text); }
+    .hero h1 .line2 {
+      display: block;
+      background: linear-gradient(90deg, var(--c1) 0%, var(--c5) 50%, var(--c2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      max-width: 500px; margin-top: 1.8rem;
+      color: var(--muted); line-height: 1.7; font-size: 1.05rem;
+    }
+    .hero-ctas {
+      display: flex; gap: 1rem; margin-top: 2.5rem;
+    }
+    .btn-primary {
+      background: var(--c1); color: #fff;
+      padding: .85rem 2rem; border-radius: 4px;
+      text-decoration: none; font-weight: 600; font-size: 0.95rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.45); }
+    .btn-outline {
+      border: 1.5px solid #1a2540; color: var(--text);
+      padding: .85rem 2rem; border-radius: 4px;
+      text-decoration: none; font-weight: 600; font-size: 0.95rem;
+      transition: border-color .2s;
+      font-family: 'Space Mono', monospace;
+    }
+    .btn-outline:hover { border-color: var(--c2); color: var(--c2); }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--muted);
+      display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 1;
+    }
+    .scroll-dot {
+      width: 6px; height: 6px; background: var(--c1); border-radius: 50%;
+      animation: bounce 1.6s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    .floating-pill {
+      position: absolute; z-index: 1;
+      font-family: 'Space Mono', monospace; font-size: 0.75rem;
+      padding: 6px 14px; border-radius: 100px;
+      pointer-events: none;
+    }
+    .pill1 { top: 22%; right: 8%; background: rgba(108,99,255,0.15); color: var(--c2); border: 1px solid rgba(108,99,255,0.3); animation: float 4s ease-in-out infinite; }
+    .pill2 { top: 38%; right: 12%; background: rgba(0,217,163,0.12); color: var(--c3); border: 1px solid rgba(0,217,163,0.3); animation: float 5s ease-in-out infinite 1s; }
+    .pill3 { top: 55%; right: 6%; background: rgba(255,209,102,0.12); color: var(--c4); border: 1px solid rgba(255,209,102,0.3); animation: float 4.5s ease-in-out infinite 0.5s; }
+    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+
+    /* SKILLS */
+    .section { padding: 6rem 4rem; }
+    .section-label {
+      font-family: 'Space Mono', monospace; font-size: 0.8rem;
+      color: var(--c1); text-transform: uppercase; letter-spacing: .15em;
+      margin-bottom: 0.8rem;
+    }
+    .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 3rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; }
+    .skill-card {
+      background: var(--surface); border: 1px solid #222;
+      border-radius: 8px; padding: 1.2rem; text-align: center;
+      transition: transform .2s, border-color .2s;
+      cursor: default;
+    }
+    .skill-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .skill-card .skill-icon { font-size: 1.8rem; margin-bottom: 0.7rem; display: flex; align-items: center; justify-content: center; height: 2.2rem; }
+    .skill-card .skill-icon i { font-size: 2.2rem; }
+    .skill-card .skill-icon svg { width: 2rem; height: 2rem; }
+    .skill-card .skill-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+      font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 4px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .project-card {
+      background: var(--surface); border: 1px solid #222; border-radius: 12px;
+      overflow: hidden; transition: transform .25s, border-color .25s;
+      display: flex; flex-direction: column; cursor: pointer;
+      min-width: 0;
+    }
+    .project-card:hover { transform: translateY(-6px); }
+
+    /* thumb */
+    .project-thumb {
+      height: 140px; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; position: relative; overflow: hidden;
+    }
+    .project-thumb-bg {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      transition: transform .3s;
+    }
+    .project-card:hover .project-thumb-bg { transform: scale(1.05); }
+    .project-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform .3s; position: relative; z-index: 1;
+    }
+    .project-card:hover .project-thumb img { transform: scale(1.05); }
+
+    .project-card:nth-child(1) .project-thumb { background: linear-gradient(135deg, #1a0a2e, #16213e); }
+    .project-card:nth-child(1):hover { border-color: var(--c2); }
+    .project-card:nth-child(2) .project-thumb { background: linear-gradient(135deg, #1a0f00, #2a1a00); }
+    .project-card:nth-child(2):hover { border-color: var(--c4); }
+    .project-card:nth-child(3) .project-thumb { background: linear-gradient(135deg, #001a14, #002a1e); }
+    .project-card:nth-child(3):hover { border-color: var(--c3); }
+    .project-card:nth-child(4) .project-thumb { background: linear-gradient(135deg, #1a0010, #2a0018); }
+    .project-card:nth-child(4):hover { border-color: var(--c5); }
+    .project-card:nth-child(5) .project-thumb { background: linear-gradient(135deg, #0a1a00, #1a2e00); }
+    .project-card:nth-child(5):hover { border-color: var(--c3); }
+    .project-card:nth-child(6) .project-thumb { background: linear-gradient(135deg, #001428, #002040); }
+    .project-card:nth-child(6):hover { border-color: var(--c4); }
+
+    .project-body { padding: 0.9rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .project-name { font-size: 0.95rem; font-weight: 800; }
+    .project-desc { color: var(--muted); font-size: 0.78rem; line-height: 1.5; flex: 1; }
+    .project-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag {
+      font-family: 'Space Mono', monospace; font-size: 0.6rem;
+      padding: 2px 7px; border-radius: 100px;
+      border: 1px solid; background: transparent;
+    }
+    .project-card:hover { transform: translateY(-6px); }
+
+    /* thumb */
+    .project-thumb {
+      height: 140px; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; position: relative; overflow: hidden;
+    }
+    .project-thumb-bg {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      transition: transform .3s;
+    }
+    .project-card:hover .project-thumb-bg { transform: scale(1.05); }
+    .project-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform .3s; position: relative; z-index: 1;
+    }
+    .project-card:hover .project-thumb img { transform: scale(1.05); }
+
+    .project-card:nth-child(1) .project-thumb { background: linear-gradient(135deg, #1a0a2e, #16213e); }
+    .project-card:nth-child(1):hover { border-color: var(--c2); }
+    .project-card:nth-child(2) .project-thumb { background: linear-gradient(135deg, #1a0f00, #2a1a00); }
+    .project-card:nth-child(2):hover { border-color: var(--c4); }
+    .project-card:nth-child(3) .project-thumb { background: linear-gradient(135deg, #001a14, #002a1e); }
+    .project-card:nth-child(3):hover { border-color: var(--c3); }
+    .project-card:nth-child(4) .project-thumb { background: linear-gradient(135deg, #1a0010, #2a0018); }
+    .project-card:nth-child(4):hover { border-color: var(--c5); }
+    .project-card:nth-child(5) .project-thumb { background: linear-gradient(135deg, #0a1a00, #1a2e00); }
+    .project-card:nth-child(5):hover { border-color: var(--c3); }
+    .project-card:nth-child(6) .project-thumb { background: linear-gradient(135deg, #001428, #002040); }
+    .project-card:nth-child(6):hover { border-color: var(--c4); }
+
+    .project-body { padding: 0.9rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .project-name { font-size: 0.95rem; font-weight: 800; }
+    .project-desc { color: var(--muted); font-size: 0.78rem; line-height: 1.5; flex: 1; }
+    .project-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag {
+      font-family: 'Space Mono', monospace; font-size: 0.6rem;
+      padding: 2px 7px; border-radius: 100px;
+      border: 1px solid; background: transparent;
+    }
+    .tag {
+      font-family: 'Space Mono', monospace; font-size: 0.7rem;
+      padding: 3px 10px; border-radius: 100px;
+      border: 1px solid; background: transparent;
+    }
+    .tag-blue { color: var(--c2); border-color: rgba(108,99,255,0.4); }
+    .tag-orange { color: var(--c1); border-color: rgba(255,107,53,0.4); }
+    .tag-green { color: var(--c3); border-color: rgba(0,217,163,0.4); }
+    .tag-yellow { color: var(--c4); border-color: rgba(255,209,102,0.4); }
+    .tag-pink { color: var(--c5); border-color: rgba(255,77,125,0.4); }
+    .project-name { font-size: 1.15rem; font-weight: 700; }
+    .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.6; flex: 1; }
+    .project-links { display: flex; gap: 1rem; margin-top: 0.5rem; }
+    .project-links a {
+      font-family: 'Space Mono', monospace; font-size: 0.78rem;
+      color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 5px;
+      transition: color .2s;
+    }
+    .project-links a:hover { color: var(--text); }
+    .project-links a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .project-thumb-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .25s;
+    }
+    .project-thumb-overlay span {
+      color: #fff; font-family: 'Space Mono', monospace; font-size: 0.8rem;
+      border: 1.5px solid #fff; padding: 7px 20px; border-radius: 100px;
+    }
+    .project-card:hover .project-thumb-overlay { opacity: 1; }
+
+    /* PROJECT MODAL */
+    .project-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .project-modal-overlay.open { display: flex; }
+    .project-modal {
+      background: var(--surface); border: 1px solid #1a2540; border-radius: 16px;
+      max-width: 1000px; width: 100%; max-height: 90vh; overflow-y: auto;
+      position: relative; animation: modalIn .25s ease;
+    }
+    @keyframes modalIn { from { opacity:0; transform:scale(.95) translateY(20px);} to {opacity:1; transform:scale(1) translateY(0);} }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem; z-index: 10;
+      background: rgba(0,0,0,0.5); border: 1px solid #333; color: var(--text);
+      width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+      font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.1); }
+    .modal-carousel {
+      position: relative; height: auto; min-height: 400px; background: #060B16;
+      border-radius: 16px 16px 0 0; overflow: hidden;
+    }
+    .carousel-track { display: flex; height: auto; transition: transform .4s cubic-bezier(.4,0,.2,1); }
+    .carousel-slide { min-width: 100%; height: auto; display: flex; align-items: center; justify-content: center; }
+    .carousel-slide img { width: 100%; height: auto; object-fit: contain; }
+    .carousel-slide .slide-placeholder { font-size: 5rem; }
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.55); border: 1px solid #333; color: #fff;
+      width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+      font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+      transition: background .2s; z-index: 5;
+    }
+    .carousel-btn:hover { background: rgba(37,99,235,0.6); border-color: var(--c1); }
+    .carousel-btn.prev { left: 1rem; }
+    .carousel-btn.next { right: 1rem; }
+    .carousel-dots {
+      position: absolute; bottom: 0.8rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 6px;
+    }
+    .carousel-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,0.3); cursor: pointer; transition: background .2s, transform .2s;
+    }
+    .carousel-dot.active { background: var(--c1); transform: scale(1.3); }
+    .carousel-counter {
+      position: absolute; top: 1rem; left: 1rem;
+      background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; font-family: 'Space Mono', monospace; font-size: 0.78rem;
+      padding: 4px 12px; border-radius: 100px; z-index: 5;
+    }
+    .modal-body { padding: 1.8rem 2rem 2rem; }
+    .modal-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+    .modal-desc { color: var(--muted); line-height: 1.75; font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .modal-links { display: flex; gap: 1rem; }
+    .modal-links a {
+      font-family: 'Space Mono', monospace; font-size: 0.8rem;
+      color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+      padding: 0.5rem 1rem; border: 1px solid #1a2540; border-radius: 6px;
+      transition: color .2s, border-color .2s;
+    }
+    .modal-links a:hover { color: var(--c2); border-color: var(--c2); }
+    .modal-links a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* CONTACT CARD */
+    .contact-card-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid #1a2540;
+      border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 500px;
+      width: 100%;
+    }
+    .contact-card-text {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(15,22,41,0.5);
+      border: 1px solid #1a2540;
+      border-radius: 8px;
+      transition: border-color .2s;
+    }
+    .contact-item:hover {
+      border-color: var(--c2);
+    }
+    .contact-item-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(129,140,248,0.1);
+      border-radius: 8px;
+      color: var(--c2);
+    }
+    .contact-item-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    .contact-item-content {
+      flex: 1;
+    }
+    .contact-item-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      margin-bottom: 0.25rem;
+    }
+    .contact-item-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .contact-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .contact-button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.5rem;
+      background: var(--surface);
+      border: 1.5px solid #1a2540;
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all .2s;
+    }
+    .contact-button:hover {
+      border-color: var(--c2);
+      color: var(--c2);
+      transform: translateY(-2px);
+    }
+    .contact-button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #1a2540; padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #444;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 0 1.5rem; }
+      .hero-inner { flex-direction: column-reverse; text-align: center; padding-top: 6rem; }
+      .hero-photo-wrap { width: 180px; height: 210px; }
+      .hero-ctas { justify-content: center; }
+      .section { padding: 4rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-info-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Ghazi Tlili</div>
+    <div class="nav-links">
+      <a href="#skills">Compétences</a>
+      <a href="#projects">Projets</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <span class="floating-pill pill1">Angular ?</span>
+    <span class="floating-pill pill2">Node.js ?</span>
+    <span class="floating-pill pill3">Symfony ?</span>
+
+    <div class="hero-inner">
+      <div class="hero-photo-wrap">
+        <img src="images/moi.jpg" alt="Ghazi Tlili" />
+      </div>
+      <div class="hero-content">
+        <p class="hero-tag">// Disponible pour de nouveaux projets</p>
+        <h1>
+          <span class="line1">Ghazi Tlili</span>
+          <span class="line2">Full-Stack Dev</span>
+        </h1>
+        <p class="hero-desc">
+          Je crée des applications web modernes, performantes et élégantes. Du front-end au back-end, je transforme vos idées en produits digitaux.
+        </p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn-primary">Voir mes projets</a>
+          <a href="#contact" class="btn-outline">Me contacter ?</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-dot"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <p class="section-label">// 01 — compétences</p>
+    <h2 class="section-title">Mon stack technique</h2>
+    <div class="skills-grid">
+      <div class="skill-card" style="--accent: #DD0031">
+        <div class="skill-icon"><i class="devicon-angularjs-plain colored"></i></div>
+        <div class="skill-name">Angular</div>
+      </div>
+      <div class="skill-card" style="--accent: #61DAFB">
+        <div class="skill-icon"><i class="devicon-react-original colored"></i></div>
+        <div class="skill-name">React.js</div>
+      </div>
+      <div class="skill-card" style="--accent: #68A063">
+        <div class="skill-icon"><i class="devicon-nodejs-plain colored"></i></div>
+        <div class="skill-name">Node.js</div>
+      </div>
+      <div class="skill-card" style="--accent: var(--c1)">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round">
+            <rect x="2" y="6" width="20" height="12" rx="2"/>
+            <path d="M6 12h4M13 10l3 2-3 2"/>
+          </svg>
+        </div>
+        <div class="skill-name">API REST</div>
+      </div>
+      <div class="skill-card" style="--accent: #1A9FDE">
+        <div class="skill-icon"><i class="devicon-symfony-original" style="color:#1A9FDE"></i></div>
+        <div class="skill-name">Symfony</div>
+      </div>
+      <div class="skill-card" style="--accent: #00758F">
+        <div class="skill-icon"><i class="devicon-mysql-plain colored"></i></div>
+        <div class="skill-name">MySQL</div>
+      </div>
+      <div class="skill-card" style="--accent: #4DB33D">
+        <div class="skill-icon"><i class="devicon-mongodb-plain colored"></i></div>
+        <div class="skill-name">MongoDB</div>
+      </div>
+      <div class="skill-card" style="--accent: #F7DF1E">
+        <div class="skill-icon"><i class="devicon-javascript-plain colored"></i></div>
+        <div class="skill-name">JavaScript</div>
+      </div>
+      <div class="skill-card" style="--accent: #3776AB">
+        <div class="skill-icon"><i class="devicon-python-plain colored"></i></div>
+        <div class="skill-name">Python</div>
+      </div>
+      <div class="skill-card" style="--accent: #ED8B00">
+        <div class="skill-icon"><i class="devicon-java-plain colored"></i></div>
+        <div class="skill-name">Java</div>
+      </div>
+      <div class="skill-card" style="--accent: #5382A1">
+        <div class="skill-icon"><i class="devicon-java-plain" style="color:#5382A1"></i></div>
+        <div class="skill-name">JavaFX</div>
+      </div>
+      <div class="skill-card" style="--accent: #8892BF">
+        <div class="skill-icon"><i class="devicon-php-plain colored"></i></div>
+        <div class="skill-name">PHP</div>
+      </div>
+      <div class="skill-card" style="--accent: #A8B9CC">
+        <div class="skill-icon"><i class="devicon-c-plain colored"></i></div>
+        <div class="skill-name">C</div>
+      </div>
+      <div class="skill-card" style="--accent: #02569B">
+        <div class="skill-icon"><i class="devicon-flutter-plain colored"></i></div>
+        <div class="skill-name">FlutterFlow</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects" style="background: #060B16;">
+    <p class="section-label">// 02 — réalisations</p>
+    <h2 class="section-title">Mes projets</h2>
+    <div class="projects-grid">
+
+      <div class="project-card" onclick="openModal()">
+        <div class="project-thumb">
+          <img src="images/2.PNG" alt="GTauto" onerror="this.style.display='none'; this.parentElement.innerHTML='🔧';" /><div class="project-thumb-overlay"><span>Voir plus</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-name">GTauto — Pièces de Rechange</div>
+          <div class="project-desc">Plateforme e-commerce de vente de pièces de rechange automobiles avec catalogue par marque/modèle, panier, chatbot et dashboard admin.</div>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag tag-blue">Angular</span>
+              <span class="tag tag-green">Node.js</span>
+              <span class="tag tag-yellow">MySQL</span>
+              <span class="tag tag-pink">Python</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModalWallet()">
+        <div class="project-thumb">
+          <img src="images/e1.jfif" alt="ESPRIT Wallet" onerror="this.style.display='none'; this.parentElement.innerHTML='🔧';" /><div class="project-thumb-overlay"><span>Voir plus</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-name">ESPRIT Wallet</div>
+          <div class="project-desc">Wallet numérique pour envoyer/recevoir de l'argent, générer et scanner des QR codes, gérer ses cartes et recevoir des notifications SMS/email.</div>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="tag tag-orange">Symfony</span>
+              <span class="tag tag-yellow">MySQL</span>
+              <span class="tag tag-green">API SMS</span>
+              <span class="tag tag-blue">API Email</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  
+
+  <!-- CONTACT -->
+  <section class="section" id="contact" style="background: #060B16;">
+    <p class="section-label">// 03 — contact</p>
+    <h2 class="section-title" style="text-align:center">Me contacter</h2>
+    <div class="contact-card-wrapper">
+      <div class="contact-card">
+        <p class="contact-card-text">
+          Disponible pour des projets freelance, des collaborations d'opportunités ou d'autres choses.
+        </p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-item-content">
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value">ghazitlili9@gmail.com</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="contact-item-content">
+              <div class="contact-item-label">Téléphone</div>
+              <div class="contact-item-value">+216 95 232 152</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-buttons">
+          <a href="https://github.com/GhaziTlili231" target="_blank" class="contact-button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/ghazi-tlili-695a01278/" target="_blank" class="contact-button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT MODAL: ESPRIT Wallet -->
+  <div class="project-modal-overlay" id="modal-wallet" onclick="if(event.target===this) closeModalWallet()">
+    <div class="project-modal">
+      <button class="modal-close" onclick="closeModalWallet()">✕</button>
+      <div class="modal-carousel">
+        <div class="carousel-counter" id="carouselCounterWallet">1 / 6</div>
+        <div class="carousel-track" id="carouselTrackWallet"></div>
+        <button class="carousel-btn prev" onclick="carouselMoveWallet(-1)">&#8592;</button>
+        <button class="carousel-btn next" onclick="carouselMoveWallet(1)">&#8594;</button>
+        <div class="carousel-dots" id="carouselDotsWallet"></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-title">ESPRIT Wallet</div>
+        <div class="modal-tags">
+          <span class="tag tag-orange">Symfony</span>
+          <span class="tag tag-yellow">MySQL</span>
+          <span class="tag tag-green">API SMS</span>
+          <span class="tag tag-blue">API Email</span>
+        </div>
+        <div class="modal-desc">
+          Wallet numérique permettant d'envoyer et recevoir de l'argent, générer et scanner des QR codes pour sécuriser les transactions, créer/bloquer/supprimer des cartes, et recevoir des notifications SMS et email à chaque transaction approuvée.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT MODAL: Pièces de Rechange -->
+  <div class="project-modal-overlay" id="modal-pieces" onclick="if(event.target===this) closeModal()">
+    <div class="project-modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-carousel">
+        <div class="carousel-counter" id="carouselCounter">1 / 12</div>
+        <div class="carousel-track" id="carouselTrack">
+          <!-- Les images seront ajoutées ici. En attendant, placeholder -->
+          <div class="carousel-slide">
+            <span class="slide-placeholder">🔧</span>
+          </div>
+        </div>
+        <button class="carousel-btn prev" onclick="carouselMove(-1)">&#8592;</button>
+        <button class="carousel-btn next" onclick="carouselMove(1)">&#8594;</button>
+        <div class="carousel-dots" id="carouselDots">
+          <div class="carousel-dot active" onclick="carouselGo(0)"></div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-title">Gestion Pièces de Rechange</div>
+        <div class="modal-tags">
+          <span class="tag tag-blue">Angular</span>
+          <span class="tag tag-green">Node.js</span>
+          <span class="tag tag-yellow">MySQL</span>
+          <span class="tag tag-pink">Python</span>
+        </div>
+        <div class="modal-desc">
+          Plateforme e-commerce de vente de pièces de rechange automobiles avec catalogue par marque/modèle, panier, chatbot intelligent, dashboard admin et gestion des commandes.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2025 — Ghazi Tlili</span>
+    <span>Fait avec 🔧 &amp; beaucoup de café</span>
+  </footer>
+
+  <script>
+    // ---- MODAL PIÈCES DE RECHANGE ----
+    const projectImages = [
+      { src: 'images/1.png',  caption: 'Dashboard Admin � statistiques & gains' },
+      { src: 'images/2.PNG',  caption: 'Page d\'accueil GTauto' },
+      { src: 'images/3.PNG',  caption: 'Catalogue des marques' },
+      { src: 'images/4.PNG',  caption: 'Modèles Volkswagen' },
+      { src: 'images/5.PNG',  caption: 'Pièces disponibles — Golf 8' },
+      { src: 'images/6.PNG',  caption: 'Chatbot intégré' },
+      { src: 'images/7.PNG',  caption: 'Page inscription' },
+      { src: 'images/8.PNG',  caption: 'Page connexion' },
+      { src: 'images/10.PNG', caption: 'Accueil utilisateur connecté' },
+      { src: 'images/11.PNG', caption: 'Panier & livraison' },
+      { src: 'images/12.PNG', caption: 'Historique d\'achat' },
+      { src: 'images/14.PNG', caption: 'Profil utilisateur' },
+    ];
+
+    let currentSlide = 0;
+
+    function buildCarousel() {
+      const track = document.getElementById('carouselTrack');
+      const dotsContainer = document.getElementById('carouselDots');
+      if (projectImages.length === 0) return;
+
+      track.innerHTML = '';
+      dotsContainer.innerHTML = '';
+
+      projectImages.forEach((item, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        slide.style.position = 'relative';
+
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.caption;
+        img.onerror = function() {
+          this.parentElement.innerHTML = '<span class="slide-placeholder">🔧</span>';
+        };
+        slide.appendChild(img);
+
+        if (item.caption) {
+          const cap = document.createElement('div');
+          cap.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.55);color:#fff;font-size:0.8rem;padding:6px 12px;font-family:Space Mono,monospace;';
+          cap.textContent = item.caption;
+          slide.appendChild(cap);
+        }
+
+        track.appendChild(slide);
+
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => carouselGo(i);
+        dotsContainer.appendChild(dot);
+      });
+
+      const btns = document.querySelectorAll('.carousel-btn');
+      btns.forEach(b => b.style.display = projectImages.length > 1 ? 'flex' : 'none');
+    }
+
+    function openModal() {
+      currentSlide = 0;
+      buildCarousel();
+      updateCarousel();
+      document.getElementById('modal-pieces').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal-pieces').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function carouselMove(dir) {
+      const total = projectImages.length || 1;
+      currentSlide = (currentSlide + dir + total) % total;
+      updateCarousel();
+    }
+
+    function carouselGo(index) {
+      currentSlide = index;
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      document.getElementById('carouselTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentSlide);
+      });
+      const counter = document.getElementById('carouselCounter');
+      if (counter) counter.textContent = `${currentSlide + 1} / ${projectImages.length}`;
+    }
+
+    // ---- MODAL ESPRIT WALLET ----
+    const walletImages = [
+      { src: 'images/e1.jfif', caption: 'ESPRIT Wallet — Vue 1' },
+      { src: 'images/e2.jfif', caption: 'ESPRIT Wallet — Vue 2' },
+      { src: 'images/e3.jfif', caption: 'ESPRIT Wallet — Vue 3' },
+      { src: 'images/e4.jfif', caption: 'ESPRIT Wallet — Vue 4' },
+      { src: 'images/e5.jfif', caption: 'ESPRIT Wallet — Vue 5' },
+      { src: 'images/e6.jfif', caption: 'ESPRIT Wallet — Vue 6' },
+    ];
+    let currentSlideWallet = 0;
+
+    function buildCarouselWallet() {
+      const track = document.getElementById('carouselTrackWallet');
+      const dotsContainer = document.getElementById('carouselDotsWallet');
+      track.innerHTML = ''; dotsContainer.innerHTML = '';
+      walletImages.forEach((item, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide'; slide.style.position = 'relative';
+        const img = document.createElement('img');
+        img.src = item.src; img.alt = item.caption;
+        img.onerror = function() { this.parentElement.innerHTML = '<span class="slide-placeholder">🔧</span>'; };
+        slide.appendChild(img);
+        if (item.caption) {
+          const cap = document.createElement('div');
+          cap.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.55);color:#fff;font-size:0.8rem;padding:6px 12px;font-family:Space Mono,monospace;';
+          cap.textContent = item.caption;
+          slide.appendChild(cap);
+        }
+        track.appendChild(slide);
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => carouselGoWallet(i);
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function openModalWallet() {
+      currentSlideWallet = 0;
+      buildCarouselWallet();
+      updateCarouselWallet();
+      document.getElementById('modal-wallet').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModalWallet() {
+      document.getElementById('modal-wallet').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function carouselMoveWallet(dir) {
+      currentSlideWallet = (currentSlideWallet + dir + walletImages.length) % walletImages.length;
+      updateCarouselWallet();
+    }
+
+    function carouselGoWallet(index) {
+      currentSlideWallet = index;
+      updateCarouselWallet();
+    }
+
+    function updateCarouselWallet() {
+      document.getElementById('carouselTrackWallet').style.transform = `translateX(-${currentSlideWallet * 100}%)`;
+      document.querySelectorAll('#modal-wallet .carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentSlideWallet);
+      });
+      const counter = document.getElementById('carouselCounterWallet');
+      if (counter) counter.textContent = `${currentSlideWallet + 1} / ${walletImages.length}`;
+    }
+
+    // Close modals on Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeModalWallet(); } });
+
+    // ---- SMOOTH SCROLL ----
+    // ---- SMOOTH SCROLL ----
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.submit-btn');
+      btn.textContent = 'Message envoyé ?';
+      btn.style.background = 'var(--c3)';
+      setTimeout(() => {
+        btn.textContent = 'Envoyer le message ?';
+        btn.style.background = '';
+        e.target.reset();
+      }, 3000);
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
+
